@@ -7,6 +7,7 @@ const QuizApp = () => {
 	const [score, setScore] = useState(0);
 	const [quizState, setquizState] = useState("started"); // Either state possible started and ended
 	const [allScores, setAllScores] = useState([]);
+
 	const averageScore =
 		allScores.length > 0
 			? allScores.reduce(
@@ -31,9 +32,7 @@ const QuizApp = () => {
 		if (currentQuestionIndex <= Object.keys(questions).length - 1) {
 			setCurrentQuestionIndex(currentQuestionIndex + 1);
 		} else {
-			// Calculate average score
-
-			// Save new score to localStorage
+			// Save new scores to localStorage
 			localStorage.setItem("scores", JSON.stringify(allScores));
 			setAllScores([...allScores, newScore]);
 			setquizState("ended");
@@ -55,7 +54,6 @@ const QuizApp = () => {
 	};
 
 	useEffect(() => {
-		// Calculate average score on initial load
 		const prevScores = JSON.parse(localStorage.getItem("scores")) || [];
 		setAllScores(prevScores);
 	}, []);
